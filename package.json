@@ -1,16 +1,16 @@
 {
   "private": true,
   "name": "tinysync",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "tinybase": "^5.1.0",
-    "ws": "^8.18.0"
+    "tinybase": "^6.7.2",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
-    "@types/ws": "^8.5.11"
+    "@types/ws": "^8.18.1"
   }
 }
