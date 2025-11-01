@@ -1,6 +1,6 @@
 import { createServer } from "http";
-import { WebSocket, WebSocketServer } from "ws";
 import { createWsServer } from "tinybase/synchronizers/synchronizer-ws-server";
+import { WebSocket, WebSocketServer } from "ws";
 
 // Client's deadline to respond to a ping, in milliseconds.
 const TTL = 10 * 1000;
@@ -42,7 +42,7 @@ webSocketServer.on("connection", (client, request) => {
     timeout = setClientTimeout(client);
   });
 
-  const ping = setInterval(() => {
+  const pinger = setInterval(() => {
     if (client.readyState === WebSocket.OPEN) {
       client.ping();
     }
@@ -51,10 +51,10 @@ webSocketServer.on("connection", (client, request) => {
   client.on("close", (code, readon) => {
     const clientIds = synchronizer.getClientIds(roomId);
 
-    clearInterval(ping);
+    clearInterval(pinger);
     clearTimeout(timeout);
 
-    log("CLOSED", url, code, clientIds.length, clientIds);
+    log("CLOSED", code, url, clientIds.length, clientIds);
   });
 
   log("CONNECTED", url, clientIds.length, clientIds);
